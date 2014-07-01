@@ -120,6 +120,8 @@ exports.articleByID = function(req, res, next, id) {
 };
 
 exports.requiresLogin = function(req, res, next) {
+	console.log('requiresLogin req.isAuthenticated() ' + req.isAuthenticated());
+	console.log('requiresLogin req.isAuthenticated() ' + req.isAuthenticated);
 	// TODO-evaluate: service-call to user-service
 	if (!req.isAuthenticated()) {
 		return res.send(401, {
@@ -133,6 +135,8 @@ exports.requiresLogin = function(req, res, next) {
  * Article authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
+	console.log('hasAuthorization ');
+
 	if (req.article.userid !== req.user.id) {
 		return res.send(403, {
 			message: 'User is not authorized'

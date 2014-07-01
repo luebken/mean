@@ -2,8 +2,15 @@ web:
   build: .
   links:
    - db
+   - articles
   ports:
    - "3000:3000"
+articles:
+  build: ./mean-articles
+  links:
+   - db
+  ports:
+   - "3001:3001"
 db:
   image: mongo
   ports: 

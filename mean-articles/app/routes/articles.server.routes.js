@@ -8,7 +8,7 @@ var articles = require('../../app/controllers/articles');
 module.exports = function(app) {
 	// Article Routes
 	app.route('/articles')
-		.get(articles.list)
+		.get(articles.requiresLogin, articles.list)
 		.post(articles.requiresLogin, articles.create);
 
 	app.route('/articles/:articleId')
