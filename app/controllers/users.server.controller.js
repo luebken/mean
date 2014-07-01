@@ -208,6 +208,13 @@ exports.me = function(req, res) {
 };
 
 /**
+ * Expose isAuthenticated
+ */
+exports.isAuthenticated = function(req, res) {
+	res.send(200, req.isAuthenticated());
+};
+
+/**
  * OAuth callback
  */
 exports.oauthCallback = function(strategy) {

@@ -41,6 +41,10 @@ module.exports = function(app) {
 	app.route('/auth/linkedin').get(passport.authenticate('linkedin'));
 	app.route('/auth/linkedin/callback').get(users.oauthCallback('linkedin'));
 
+	// Expose isAuthenticated
+	app.route('/auth/isauthenticated').get(users.isAuthenticated);
+
+
 	// Finish by binding the user middleware
 	app.param('userId', users.userByID);
 };
