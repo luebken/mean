@@ -24,9 +24,6 @@ var ArticleSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true
-	},
-	userid: {
-		type: String
 	}
 });
 
