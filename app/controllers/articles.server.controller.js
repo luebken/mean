@@ -36,7 +36,7 @@ var getErrorMessage = function(err) {
  */
 exports.create = function(req, res) {
 	var article = new Article(req.body);
-	article.user = req.user;
+	article.userid = req.user.id;
 
 	article.save(function(err) {
 		if (err) {
@@ -119,11 +119,21 @@ exports.articleByID = function(req, res, next, id) {
 	});
 };
 
+exports.requiresLogin = function(req, res, next) {
+	// TODO-evaluate: service-call to user-service
+	if (!req.isAuthenticated()) {
+		return res.send(401, {
+			message: 'User is not logged in'
+		});
+	}
+	next();
+};
+
 /**
  * Article authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.article.user.id !== req.user.id) {
+	if (req.article.userid !== req.user.id) {
 		return res.send(403, {
 			message: 'User is not authorized'
 		});
