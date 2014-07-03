@@ -7,7 +7,6 @@ module.exports = function(grunt) {
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 		clientViews: ['public/modules/**/views/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
-		clientCSS: ['public/modules/**/*.css'],
 		mochaTests: ['app/tests/**/*.js']
 	};
 
@@ -40,13 +39,6 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true
 				}
-			},
-			clientCSS: {
-				files: watchFiles.clientCSS,
-				tasks: ['csslint'],
-				options: {
-					livereload: true
-				}
 			}
 		},
 		jshint: {
@@ -57,14 +49,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		csslint: {
-			options: {
-				csslintrc: '.csslintrc',
-			},
-			all: {
-				src: watchFiles.clientCSS
-			}
-		},
 		uglify: {
 			production: {
 				options: {
@@ -72,13 +56,6 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'public/dist/application.min.js': 'public/dist/application.js'
-				}
-			}
-		},
-		cssmin: {
-			combine: {
-				files: {
-					'public/dist/application.min.css': '<%= applicationCSSFiles %>'
 				}
 			}
 		},
@@ -150,7 +127,6 @@ module.exports = function(grunt) {
 		var config = require('./config/config');
 
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
-		grunt.config.set('applicationCSSFiles', config.assets.css);
 	});
 
 	// Default task(s).
@@ -160,10 +136,10 @@ module.exports = function(grunt) {
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
 
 	// Lint task(s).
-	grunt.registerTask('lint', ['jshint', 'csslint']);
+	grunt.registerTask('lint', ['jshint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
