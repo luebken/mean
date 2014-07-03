@@ -5,12 +5,16 @@ web:
    - articles
   ports:
    - "3000:3000"
+  environment:
+   NODE_ENV: development
 articles:
   build: ./mean-articles
   links:
    - db
   ports:
    - "3001:3001"
+  environment:
+   NODE_ENV: development
 db:
   image: mongo
   ports: 
