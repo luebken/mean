@@ -5,37 +5,27 @@
  */
 var should = require('should'),
 	mongoose = require('mongoose'),
-	User = mongoose.model('User'),
 	Article = mongoose.model('Article');
 
 /**
  * Globals
  */
-var user, article;
+var article;
 
 /**
  * Unit tests
  */
 describe('Article Model Unit Tests:', function() {
 	beforeEach(function(done) {
-		user = new User({
-			firstName: 'Full',
-			lastName: 'Name',
-			displayName: 'Full Name',
-			email: 'test@test.com',
-			username: 'username',
-			password: 'password'
-		});
 
-		user.save(function() {
 			article = new Article({
 				title: 'Article Title',
-				content: 'Article Content',
-				user: user
+				content: 'Article Content'
 			});
+			article.save(function() {
+				done();
+			})
 
-			done();
-		});
 	});
 
 	describe('Method Save', function() {
@@ -58,7 +48,6 @@ describe('Article Model Unit Tests:', function() {
 
 	afterEach(function(done) {
 		Article.remove().exec();
-		User.remove().exec();
 		done();
 	});
 });
