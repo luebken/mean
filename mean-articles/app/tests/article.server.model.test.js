@@ -24,7 +24,7 @@ describe('Article Model Unit Tests:', function() {
 			});
 			article.save(function() {
 				done();
-			})
+			});
 
 	});
 
