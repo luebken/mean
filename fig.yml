@@ -10,6 +10,6 @@ web:
   environment: 
    NODE_ENV: development
 db:
-  image: mongo
+  image: mongo:latest
   ports: 
    - "27017:27017"
