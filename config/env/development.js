@@ -1,9 +1,22 @@
 'use strict';
 
-var DB_HOST = process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost';
-
 module.exports = {
-	db: 'mongodb://' + DB_HOST + '/mean-dev',
+	db: {
+		uri: 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean-dev',
+		options: {
+			user: '',
+			pass: ''
+		}
+	},
+	log: {
+		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+		format: 'dev',
+		// Stream defaults to process.stdout
+		// Uncomment to enable logging to a log on the file system
+		options: {
+			//stream: 'access.log'
+		}
+	},
 	app: {
 		title: 'MEAN.JS - Development Environment'
 	},

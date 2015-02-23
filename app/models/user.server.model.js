@@ -50,7 +50,7 @@ var UserSchema = new Schema({
 	},
 	username: {
 		type: String,
-		unique: 'testing error message',
+		unique: 'Username already exists',
 		required: 'Please fill in a username',
 		trim: true
 	},
@@ -86,9 +86,9 @@ var UserSchema = new Schema({
 	resetPasswordToken: {
 		type: String
 	},
-  	resetPasswordExpires: {
-  		type: Date
-  	}
+	resetPasswordExpires: {
+		type: Date
+	}
 });
 
 /**
